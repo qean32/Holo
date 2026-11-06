@@ -20,7 +20,7 @@ func Test() {
 }
 
 func TestView() {
-	if err := death.WriteFile(callstack.GetErrorsString(), filepath.Join("tmplog.asc")); err != nil {
+	if err := death.WriteFile(callstack.GetErrorsString(), filepath.Join("tmplog.txt")); err != nil {
 		fmt.Println(err)
 		return
 	}
@@ -28,6 +28,6 @@ func TestView() {
 	defer callstack.PushMany(
 		model.Event{Key: eventlist.PUREREMOVEBAT, KeyWord: "tmpbat"},
 		model.Event{Key: eventlist.RUNBAT, KeyWord: "tmpbat"},
-		model.Event{Key: eventlist.BAT, KeyWord: "tmpbat", Payload: "start " + filepath.Join(constants.Root, "tmplog.asc")},
+		model.Event{Key: eventlist.BAT, KeyWord: "tmpbat", Payload: "start " + filepath.Join(constants.Root, "tmplog.txt")},
 	)
 }

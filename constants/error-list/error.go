@@ -87,7 +87,7 @@ func ReadFile(path string, err error) error {
 
 // CreateFile — error creating the file at path.
 func CreateFile(path string, err error) error {
-	return fmt.Errorf("Create %s: %w", path, err)
+	return fmt.Errorf("Create %s: %w; Возможно необходимо -init", path, err)
 }
 
 // WriteFile — error writing to the file at path.

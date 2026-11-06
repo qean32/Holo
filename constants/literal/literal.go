@@ -9,7 +9,7 @@ var Extension = extensionType{
 }
 
 var Path = pathType{
-	PathLog: "log.asc",
+	PathLog: "log.txt",
 }
 
 var Titles = titleType{

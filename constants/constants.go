@@ -42,7 +42,7 @@ var PROJECT_INIT = `
 
 // ASCII
 // https://translated.turbopages.org/proxy_u/en-ru.ru.6c604ba4-6a11ef9b-b4e5d92b-74722d776562/https/student.cs.uwaterloo.ca/~cs452/terminal.html
-// https://www.asciiart.eu/text-to-ascii-art respect
+// https://www.txtiiart.eu/text-to-ascii-art respect
 // https://patorjk.com/software/taag/#p=testall&f=Broadway&t=holoproject+2&x=none&v=4&h=4&w=80&we=false
 
 var HelpMessage = `
@@ -70,7 +70,7 @@ var HelpMessage = `
 %v
 `
 
-const CHAR_SELECTED_ITEM = "+ "
+const CHAR_SELECTED_ITEM = "> "
 const CHAR_UN_SELECTED_ITEM = "│  "
 
 const FIELDPREFIX = "> "
