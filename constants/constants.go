@@ -12,7 +12,7 @@ const projectName = "holoproject"
 
 var (
 	Root = `private`
-	Cmd  = `cmd`
+	Scenario  = `scenario`
 )
 
 func InitRoot() error {
@@ -55,11 +55,6 @@ var HelpMessage = `
 %v crypto         encryption
 %v ecrypto        decryption
 %v
-%v bat            add .bat                          bat keyWord -p:payload
-%v list           list .bat
-%v run            run .bat                          run keyWord
-%v rbat           remove .bat                       rbat keyWord
-%v
 %v gmaster        generate master key
 %v gkey           generate key
 %v
@@ -67,6 +62,11 @@ var HelpMessage = `
 %v
 %v
 %v menu, clog, log, drop, stop, help,
+%v
+%v sc             add scenario                          sc keyWord -p:payload
+%v list           list scenarios
+%v run            run scenario                          run keyWord
+%v rsc            remove scenario                       rsc keyWord
 %v
 `
 

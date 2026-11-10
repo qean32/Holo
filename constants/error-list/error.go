@@ -27,6 +27,8 @@ var (
 	// INITIALIZATION
 	ErrTempDirEmpty = errors.New("os.TempDir() returned an empty path")
 	ErrInitRoot     = errors.New("Initialization error!")
+
+	ErrScenarioOff = errors.New("Отключена работа со сценариями -sct")
 )
 
 // InvalidName builds an invalid name error,

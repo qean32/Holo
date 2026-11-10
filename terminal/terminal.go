@@ -22,10 +22,10 @@ func Println(messages ...any) {
 }
 
 func PrintResponse(messages ...any) {
-	Println(messages...)
-	Println("")
+	Println()
+	Println("[ИНФО] ", utils.ConcatMessage(messages...))
+	Println()
 }
-
 func PrintTopLine() {
 	Println("")
 }

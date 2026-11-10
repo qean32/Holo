@@ -6,24 +6,35 @@ import (
 	"main/constants"
 	eventlist "main/constants/event-list"
 	"main/constants/literal"
+	"main/lib/global"
 	"main/model"
 	"main/terminal"
 	"main/terminal/list"
 )
 
-var Menu = []model.Option{
-	{Message: "Запустить команду", Event: model.Event{Key: eventlist.BATLIST}},
-	{Message: "Ручной ввод", Event: model.Event{Key: eventlist.MANUAL}},
-	{Message: "Удалить команду", Event: model.Event{Key: eventlist.BATLISTREMOVE}},
-	{Message: "Добавить команду", Event: model.Event{Key: eventlist.MANUCREATEBAT}},
-	{Message: "Генерация мастер ключа", Event: model.Event{Key: eventlist.INWORK}},
-	{Message: "Помощь", Event: model.Event{Key: eventlist.HELP}},
-	{Message: "Выход", Event: model.Event{Key: eventlist.STOP}},
+func Menu() []model.Option {
+	items := []model.Option{
+		{Message: "Ручной ввод", Event: model.Event{Key: eventlist.MANUAL}},
+		{Message: "Помощь", Event: model.Event{Key: eventlist.HELP}},
+		{Message: "Генерация мастер ключа", Event: model.Event{Key: eventlist.INWORK}},
+		{Message: "Выход", Event: model.Event{Key: eventlist.STOP}},
+	}
+
+	if global.ScenarioEnabled() {
+		scenarioItems := []model.Option{
+			{Message: "Запустить команду", Event: model.Event{Key: eventlist.LISTSCENARIO}},
+			{Message: "Добавить команду", Event: model.Event{Key: eventlist.MANUCREATESCENARIO}},
+			{Message: "Удалить команду", Event: model.Event{Key: eventlist.LISTSCENARIOREMOVE}},
+		}
+		items = append(scenarioItems, items...)
+	}
+
+	return items
 }
 
 func runMenu() {
 	list.List(model.ListPayload{
-		Options: Menu,
+		Options: Menu(),
 		Title:   literal.Titles.Menu,
 	})
 }

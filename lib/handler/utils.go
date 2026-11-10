@@ -20,9 +20,9 @@ func validateName(name string) error {
 }
 
 func cmdPath(keyword string) string {
-	return filepath.Join(constants.Cmd, keyword+literal.Extension.Bat)
+	return filepath.Join(constants.Scenario, keyword+literal.Extension.Scenario)
 }
 
 func trimExtension(str string) string {
-	return strings.TrimSuffix(str, literal.Extension.Bat)
+	return strings.TrimSuffix(str, literal.Extension.Scenario)
 }
