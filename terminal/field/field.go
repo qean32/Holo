@@ -16,6 +16,8 @@ func Field(payload model.FieldPayload) string {
 	terminal.Print(utils.GetCustomMessage(payload.Prefix, payload.PrefixSRG...))
 	text, _ := reader.ReadString('\n')
 
-	terminal.DownAndStart()
+	if payload.Transfer {
+		terminal.DownAndStart()
+	}
 	return strings.TrimSpace(text)
 }
