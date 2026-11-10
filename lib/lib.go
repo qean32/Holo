@@ -14,14 +14,14 @@ import (
 )
 
 var successEvents = []string{
-	eventlist.BAT,
-	eventlist.PUREREMOVEBAT,
+	eventlist.SCENARIO,
+	eventlist.PUREREMOVESCENARIO,
 	eventlist.TEST,
 	eventlist.CLEARLOG,
 	eventlist.CRYPTO,
 	eventlist.DROP,
 	eventlist.INIT,
-	eventlist.RUNBAT,
+	eventlist.RUNSCENARIO,
 }
 
 func Init() {

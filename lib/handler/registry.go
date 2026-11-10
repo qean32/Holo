@@ -4,6 +4,7 @@ import (
 	test "main/__test__"
 	"main/callstack/manual"
 	"main/lib/death"
+	"main/lib/global"
 	"main/model"
 
 	errorlist "main/constants/error-list"
@@ -14,15 +15,6 @@ var registry = map[string]model.Handler{
 	// клиентские
 	eventlist.INIT: ignoreEvent(init_),
 
-	eventlist.BAT:           bat,
-	eventlist.MANUCREATEBAT: ignoreEvent(questionnaireCreateBat),
-
-	eventlist.RUNBAT:    runBat,
-	eventlist.REMOVEBAT: qAccess,
-
-	eventlist.BATLIST:       ignoreEvent(runBatList),
-	eventlist.BATLISTREMOVE: ignoreEvent(removeBatList),
-
 	eventlist.HELP:   ignoreError(help),
 	eventlist.MENU:   ignoreError(runMenu),
 	eventlist.RESET:  ignoreError(reset),
@@ -30,7 +22,8 @@ var registry = map[string]model.Handler{
 	eventlist.STOP:   ignoreError(death.Exit),
 	eventlist.MANUAL: ignoreError(manual.Manual),
 
-	eventlist.LOGGER: ignoreError(toggleLogger),
+	eventlist.LOGGERTOGGLE:   ignoreError(toggleLogger),
+	eventlist.SCENARIOTOGGLE: ignoreError(toggleScenario),
 
 	eventlist.CLEARLOG: ignoreEvent(clearLog),
 	eventlist.OPENLOG:  ignoreEvent(openLog),
@@ -40,13 +33,23 @@ var registry = map[string]model.Handler{
 
 	eventlist.GENERATEKEY:    ignoreEvent(generateKey),
 	eventlist.GENERATEMASTER: ignoreEvent(generateMasterKey),
+
 	// технические
-	eventlist.PUREREMOVEBAT: removeCmd,
-	eventlist.INWORK:        ignoreError(inwork),
-	eventlist.TEST:          ignoreError(test.Test),
-	eventlist.TESTVIEW:      ignoreError(test.TestView),
-	eventlist.RESPONSE:      _response,
-	eventlist.MENUCRYPTO:    ignoreError(inwork),
+	eventlist.INWORK:     ignoreError(inwork),
+	eventlist.TEST:       ignoreError(test.Test),
+	eventlist.TESTVIEW:   ignoreError(test.TestView),
+	eventlist.RESPONSE:   _response,
+	eventlist.MENUCRYPTO: ignoreError(inwork),
+	// сценарии
+	eventlist.PUREREMOVESCENARIO: decorateScenarioEvent(removeCmd),
+	eventlist.SCENARIO:           decorateScenarioEvent(createScenario),
+	eventlist.MANUCREATESCENARIO: decorateScenario(questionnaireCreateBat),
+
+	eventlist.RUNSCENARIO:    decorateScenarioEvent(runScenario),
+	eventlist.REMOVESCENARIO: decorateScenarioEvent(qAccess),
+
+	eventlist.LISTSCENARIO:       decorateScenario(runBatList),
+	eventlist.LISTSCENARIOREMOVE: decorateScenario(removeBatList),
 }
 
 func ignoreError(fn func()) model.Handler {
@@ -59,6 +62,24 @@ func ignoreError(fn func()) model.Handler {
 func ignoreEvent(fn func() error) model.Handler {
 	return func(_ model.Event) error {
 		return fn()
+	}
+}
+
+func decorateScenario(fn func() error) model.Handler {
+	return func(_ model.Event) error {
+		if !global.ScenarioEnabled() {
+			return errorlist.ErrScenarioOff
+		}
+		return fn()
+	}
+}
+
+func decorateScenarioEvent(fn func(e model.Event) error) model.Handler {
+	return func(e model.Event) error {
+		if !global.ScenarioEnabled() {
+			return errorlist.ErrScenarioOff
+		}
+		return fn(e)
 	}
 }
 

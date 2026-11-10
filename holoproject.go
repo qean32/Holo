@@ -8,7 +8,7 @@ import (
 	"main/callstack/event"
 	eventlist "main/constants/event-list"
 	"main/lib"
-	"main/lib/eventlog"
+	"main/lib/global"
 	"main/terminal"
 	"main/terminal/qcallback"
 )
@@ -32,7 +32,7 @@ func runLoop() {
 			if !ok {
 				break
 			}
-			if eventlog.Enabled() && ev.Key != eventlist.RESPONSE {
+			if global.EventLogEnabled() && ev.Key != eventlist.RESPONSE {
 				terminal.PrintTechInfo(ev)
 			}
 			if err := lib.HandleEvent(ev); err != nil {

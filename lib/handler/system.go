@@ -10,7 +10,7 @@ import (
 	errorlist "main/constants/error-list"
 	"main/constants/literal"
 	"main/lib/death"
-	"main/lib/eventlog"
+	"main/lib/global"
 	"main/terminal"
 )
 
@@ -51,18 +51,25 @@ func inwork() {
 	event.Response("В разработке")
 }
 
-// toggleLogger переключает вывод технических логов событий в терминал.
 func toggleLogger() {
-	if eventlog.Toggle() {
+	if global.EventLogToggle() {
 		event.Response("Логирование событий: включено")
 		return
 	}
 	event.Response("Логирование событий: выключено")
 }
 
+func toggleScenario() {
+	if global.ScenarioToggle() {
+		event.Response("Работа со сценариями: включено")
+		return
+	}
+	event.Response("Работа со сценариями: выключено")
+}
+
 func init_() error {
-	if err := os.MkdirAll(filepath.Join(constants.Root, constants.Cmd), dirPerm); err != nil {
-		return errorlist.Create(constants.Cmd, err)
+	if err := os.MkdirAll(filepath.Join(constants.Root, constants.Scenario), dirPerm); err != nil {
+		return errorlist.Create(constants.Scenario, err)
 	}
 	return death.CreateFile(literal.Path.PathLog, "")
 }
