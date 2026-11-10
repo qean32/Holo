@@ -11,8 +11,8 @@ import (
 const projectName = "holoproject"
 
 var (
-	Root = `private`
-	Scenario  = `scenario`
+	Root   = `private`
+	Script = `script`
 )
 
 func InitRoot() error {
@@ -63,10 +63,10 @@ var HelpMessage = `
 %v
 %v menu, clog, log, drop, stop, help,
 %v
-%v sc             add scenario                          sc keyWord -p:payload
-%v list           list scenarios
-%v run            run scenario                          run keyWord
-%v rsc            remove scenario                       rsc keyWord
+%v sc             add script                          sc keyWord -p:payload
+%v list           list scripts
+%v run            run script                          run keyWord
+%v rsc            remove script                       rsc keyWord
 %v
 `
 

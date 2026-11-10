@@ -59,8 +59,8 @@ func toggleLogger() {
 	event.Response("Логирование событий: выключено")
 }
 
-func toggleScenario() {
-	if global.ScenarioToggle() {
+func toggleScript() {
+	if global.ScriptToggle() {
 		event.Response("Работа со сценариями: включено")
 		return
 	}
@@ -68,8 +68,8 @@ func toggleScenario() {
 }
 
 func init_() error {
-	if err := os.MkdirAll(filepath.Join(constants.Root, constants.Scenario), dirPerm); err != nil {
-		return errorlist.Create(constants.Scenario, err)
+	if err := os.MkdirAll(filepath.Join(constants.Root, constants.Script), dirPerm); err != nil {
+		return errorlist.Create(constants.Script, err)
 	}
 	return death.CreateFile(literal.Path.PathLog, "")
 }

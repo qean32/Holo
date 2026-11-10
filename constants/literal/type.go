@@ -1,7 +1,7 @@
 package literal
 
 type extensionType struct {
-	Scenario string
+	Script string
 }
 
 type pathType struct {
@@ -9,10 +9,10 @@ type pathType struct {
 }
 
 type titleType struct {
-	Menu          string
-	ListScenario  string
-	EnterScenario string
-	Access        string
+	Menu        string
+	ListScript  string
+	EnterScript string
+	Access      string
 }
 
 type flagType struct {

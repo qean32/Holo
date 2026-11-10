@@ -13,9 +13,9 @@ import (
 func Test() {
 	callstack.PushMany(
 		model.Event{Key: eventlist.TESTVIEW},
-		model.Event{Key: eventlist.PUREREMOVESCENARIO, KeyWord: "test"},
-		model.Event{Key: eventlist.RUNSCENARIO, KeyWord: "test"},
-		model.Event{Key: eventlist.SCENARIO, KeyWord: "test", Payload: "start cmd /C echo 67"},
+		model.Event{Key: eventlist.PUREREMOVESCRIPT, KeyWord: "test"},
+		model.Event{Key: eventlist.RUNSCRIPT, KeyWord: "test"},
+		model.Event{Key: eventlist.SCRIPT, KeyWord: "test", Payload: "start cmd /C echo 67"},
 	)
 }
 
@@ -26,8 +26,8 @@ func TestView() {
 	}
 
 	defer callstack.PushMany(
-		model.Event{Key: eventlist.PUREREMOVESCENARIO, KeyWord: "tmpbat"},
-		model.Event{Key: eventlist.RUNSCENARIO, KeyWord: "tmpbat"},
-		model.Event{Key: eventlist.SCENARIO, KeyWord: "tmpbat", Payload: "start " + filepath.Join(constants.Root, "tmplog.txt")},
+		model.Event{Key: eventlist.PUREREMOVESCRIPT, KeyWord: "tmpbat"},
+		model.Event{Key: eventlist.RUNSCRIPT, KeyWord: "tmpbat"},
+		model.Event{Key: eventlist.SCRIPT, KeyWord: "tmpbat", Payload: "start " + filepath.Join(constants.Root, "tmplog.txt")},
 	)
 }

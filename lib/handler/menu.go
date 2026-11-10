@@ -20,13 +20,13 @@ func Menu() []model.Option {
 		{Message: "Выход", Event: model.Event{Key: eventlist.STOP}},
 	}
 
-	if global.ScenarioEnabled() {
-		scenarioItems := []model.Option{
-			{Message: "Запустить команду", Event: model.Event{Key: eventlist.LISTSCENARIO}},
-			{Message: "Добавить команду", Event: model.Event{Key: eventlist.MANUCREATESCENARIO}},
-			{Message: "Удалить команду", Event: model.Event{Key: eventlist.LISTSCENARIOREMOVE}},
+	if global.ScriptEnabled() {
+		scriptItems := []model.Option{
+			{Message: "Запустить команду", Event: model.Event{Key: eventlist.LISTSCRIPT}},
+			{Message: "Добавить команду", Event: model.Event{Key: eventlist.MANUCREATESCRIPT}},
+			{Message: "Удалить команду", Event: model.Event{Key: eventlist.LISTSCRIPTREMOVE}},
 		}
-		items = append(scenarioItems, items...)
+		items = append(scriptItems, items...)
 	}
 
 	return items

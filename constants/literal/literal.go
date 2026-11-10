@@ -5,7 +5,7 @@ var Flags = flagType{
 }
 
 var Extension = extensionType{
-	Scenario: ".bat",
+	Script: ".bat",
 }
 
 var Path = pathType{
@@ -13,8 +13,8 @@ var Path = pathType{
 }
 
 var Titles = titleType{
-	Menu:          "Меню",
-	ListScenario:  "Список сценариев",
-	EnterScenario: "Добавить сценарий",
-	Access:        "Подтвердите действие (yea/no)",
+	Menu:        "Меню",
+	ListScript:  "Список сценариев",
+	EnterScript: "Добавить сценарий",
+	Access:      "Подтвердите действие (yea/no)",
 }

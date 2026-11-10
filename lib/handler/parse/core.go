@@ -28,9 +28,9 @@ var registry = map[string]Options{
 	eventlist.CRYPTO:   {KeyWord: true, Payload: true, Password: true},
 	eventlist.DECRYPTO: {KeyWord: true, Password: true},
 
-	eventlist.SCENARIO:       {KeyWord: true, Payload: true},
-	eventlist.RUNSCENARIO:    {KeyWord: true},
-	eventlist.REMOVESCENARIO: {GetSubEvent: true, SubEvent: eventlist.PUREREMOVESCENARIO, KeyWord: true},
+	eventlist.SCRIPT:       {KeyWord: true, Payload: true},
+	eventlist.RUNSCRIPT:    {KeyWord: true},
+	eventlist.REMOVESCRIPT: {GetSubEvent: true, SubEvent: eventlist.PUREREMOVESCRIPT, KeyWord: true},
 }
 
 func Dispatch(key string, args []string) (model.Event, error) {

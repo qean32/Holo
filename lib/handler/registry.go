@@ -22,8 +22,8 @@ var registry = map[string]model.Handler{
 	eventlist.STOP:   ignoreError(death.Exit),
 	eventlist.MANUAL: ignoreError(manual.Manual),
 
-	eventlist.LOGGERTOGGLE:   ignoreError(toggleLogger),
-	eventlist.SCENARIOTOGGLE: ignoreError(toggleScenario),
+	eventlist.LOGGERTOGGLE: ignoreError(toggleLogger),
+	eventlist.SCRIPTTOGGLE: ignoreError(toggleScript),
 
 	eventlist.CLEARLOG: ignoreEvent(clearLog),
 	eventlist.OPENLOG:  ignoreEvent(openLog),
@@ -41,15 +41,15 @@ var registry = map[string]model.Handler{
 	eventlist.RESPONSE:   _response,
 	eventlist.MENUCRYPTO: ignoreError(inwork),
 	// сценарии
-	eventlist.PUREREMOVESCENARIO: decorateScenarioEvent(removeCmd),
-	eventlist.SCENARIO:           decorateScenarioEvent(createScenario),
-	eventlist.MANUCREATESCENARIO: decorateScenario(questionnaireCreateBat),
+	eventlist.PUREREMOVESCRIPT: decorateScriptEvent(removeCmd),
+	eventlist.SCRIPT:           decorateScriptEvent(createScript),
+	eventlist.MANUCREATESCRIPT: decorateScript(questionnaireCreateBat),
 
-	eventlist.RUNSCENARIO:    decorateScenarioEvent(runScenario),
-	eventlist.REMOVESCENARIO: decorateScenarioEvent(qAccess),
+	eventlist.RUNSCRIPT:    decorateScriptEvent(runScript),
+	eventlist.REMOVESCRIPT: decorateScriptEvent(qAccess),
 
-	eventlist.LISTSCENARIO:       decorateScenario(runBatList),
-	eventlist.LISTSCENARIOREMOVE: decorateScenario(removeBatList),
+	eventlist.LISTSCRIPT:       decorateScript(runBatList),
+	eventlist.LISTSCRIPTREMOVE: decorateScript(removeBatList),
 }
 
 func ignoreError(fn func()) model.Handler {
@@ -65,19 +65,19 @@ func ignoreEvent(fn func() error) model.Handler {
 	}
 }
 
-func decorateScenario(fn func() error) model.Handler {
+func decorateScript(fn func() error) model.Handler {
 	return func(_ model.Event) error {
-		if !global.ScenarioEnabled() {
-			return errorlist.ErrScenarioOff
+		if !global.ScriptEnabled() {
+			return errorlist.ErrScriptOff
 		}
 		return fn()
 	}
 }
 
-func decorateScenarioEvent(fn func(e model.Event) error) model.Handler {
+func decorateScriptEvent(fn func(e model.Event) error) model.Handler {
 	return func(e model.Event) error {
-		if !global.ScenarioEnabled() {
-			return errorlist.ErrScenarioOff
+		if !global.ScriptEnabled() {
+			return errorlist.ErrScriptOff
 		}
 		return fn(e)
 	}

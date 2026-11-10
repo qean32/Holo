@@ -15,29 +15,29 @@ const (
 	STOP = "stop"
 	HELP = "help"
 
-	SCENARIO       = "sc"
-	RUNSCENARIO    = "run"
-	REMOVESCENARIO = "rsc"
+	SCRIPT       = "sc"
+	RUNSCRIPT    = "run"
+	REMOVESCRIPT = "rsc"
 
-	LISTSCENARIO       = "list"
-	LISTSCENARIOREMOVE = "listremove"
+	LISTSCRIPT       = "list"
+	LISTSCRIPTREMOVE = "listremove"
 
 	MENU = "menu"
 	INIT = "init"
 
-	LOGGERTOGGLE   = "logger"
-	SCENARIOTOGGLE = "sct"
+	LOGGERTOGGLE = "logger"
+	SCRIPTTOGGLE = "sct"
 )
 
 // ТЕХНИЧЕСКИЕ
 const (
-	INWORK             = "inwork"
-	RESPONSE           = "response"
-	MANUCREATESCENARIO = "MANUCREATESCENARIO"
-	MENUCRYPTO         = "MENUCRYPTO"
-	PUREREMOVESCENARIO = "REMOVESCENARIO"
-	RESET              = "r"
-	MANUAL             = "manual"
-	TEST               = "test"
-	TESTVIEW           = "testview"
+	INWORK           = "inwork"
+	RESPONSE         = "response"
+	MANUCREATESCRIPT = "MANUCREATESCRIPT"
+	MENUCRYPTO       = "MENUCRYPTO"
+	PUREREMOVESCRIPT = "REMOVESCRIPT"
+	RESET            = "r"
+	MANUAL           = "manual"
+	TEST             = "test"
+	TESTVIEW         = "testview"
 )

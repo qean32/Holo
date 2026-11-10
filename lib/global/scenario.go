@@ -4,16 +4,16 @@ import (
 	"sync/atomic"
 )
 
-var scenario atomic.Bool
+var script atomic.Bool
 
-func ScenarioEnabled() bool {
-	return scenario.Load()
+func ScriptEnabled() bool {
+	return script.Load()
 }
 
-func ScenarioToggle() bool {
+func ScriptToggle() bool {
 	for {
-		cur := scenario.Load()
-		if scenario.CompareAndSwap(cur, !cur) {
+		cur := script.Load()
+		if script.CompareAndSwap(cur, !cur) {
 			return !cur
 		}
 	}

@@ -21,7 +21,7 @@ func _response(event model.Event) error {
 	return nil
 }
 
-func createScenario(event model.Event) error {
+func createScript(event model.Event) error {
 	if err := validateName(event.KeyWord); err != nil {
 		return errorlist.InvalidName(event.KeyWord, err)
 	}
@@ -31,7 +31,7 @@ func createScenario(event model.Event) error {
 	return nil
 }
 
-func runScenario(event model.Event) error {
+func runScript(event model.Event) error {
 	if err := validateName(event.KeyWord); err != nil {
 		return errorlist.InvalidName(event.KeyWord, err)
 	}
@@ -52,8 +52,8 @@ func removeCmd(event model.Event) error {
 }
 
 func listBatFiles(title string, makeEvent func(name string) model.Event) error {
-	dir := filepath.Join(constants.Root, constants.Scenario)
-	commands, err := death.ListFilesByExt(dir, literal.Extension.Scenario)
+	dir := filepath.Join(constants.Root, constants.Script)
+	commands, err := death.ListFilesByExt(dir, literal.Extension.Script)
 	if err != nil {
 		return errorlist.Read(dir, err)
 	}
@@ -61,7 +61,7 @@ func listBatFiles(title string, makeEvent func(name string) model.Event) error {
 	list.List(model.ListPayload{
 		Options: array.Map(commands, func(v string) model.Option {
 			return model.Option{
-				Message: strings.TrimSuffix(v, literal.Extension.Scenario),
+				Message: strings.TrimSuffix(v, literal.Extension.Script),
 				Event:   makeEvent(v),
 			}
 		}),
@@ -71,22 +71,22 @@ func listBatFiles(title string, makeEvent func(name string) model.Event) error {
 }
 
 func runBatList() error {
-	return listBatFiles(literal.Titles.ListScenario, func(value string) model.Event {
+	return listBatFiles(literal.Titles.ListScript, func(value string) model.Event {
 		return model.Event{
-			Key:     eventlist.RUNSCENARIO,
+			Key:     eventlist.RUNSCRIPT,
 			KeyWord: trimExtension(value),
 		}
 	})
 }
 
 func removeBatList() error {
-	return listBatFiles(literal.Titles.ListScenario, func(value string) model.Event {
+	return listBatFiles(literal.Titles.ListScript, func(value string) model.Event {
 		trimmed := trimExtension(value)
 		return model.Event{
-			Key:     eventlist.REMOVESCENARIO,
+			Key:     eventlist.REMOVESCRIPT,
 			KeyWord: trimmed,
 			SubEvent: &model.Event{
-				Key:     eventlist.PUREREMOVESCENARIO,
+				Key:     eventlist.PUREREMOVESCRIPT,
 				KeyWord: trimmed,
 			},
 		}
@@ -111,11 +111,11 @@ func questionnaireCreateBat() error {
 				},
 			},
 		},
-		Title: literal.Titles.EnterScenario,
+		Title: literal.Titles.EnterScript,
 	})
 
-	return createScenario(model.Event{
-		Key:      eventlist.SCENARIO,
+	return createScript(model.Event{
+		Key:      eventlist.SCRIPT,
 		KeyWord:  q["KeyWord"],
 		Payload:  q["Payload"],
 		DateTime: death.CurrentTime(),
