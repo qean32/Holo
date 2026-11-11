@@ -34,7 +34,11 @@ func fail(e model.Event, err error) error {
 	return err
 }
 
+<<<<<<< HEAD
 func logEvent(e model.Event) error {
+=======
+func logg(e model.Event) error {
+>>>>>>> 6d711bdae12e6a75969e433c0a54417e0a79bf7e
 	if err := death.Logger(model.StackError{Event: e}); err != nil {
 		event.Response(err)
 		return err

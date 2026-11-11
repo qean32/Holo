@@ -37,6 +37,7 @@ func ignoreEvent(fn func() error) model.Handler {
 		return fn()
 	}
 }
+<<<<<<< HEAD
 
 func decorateScript(fn model.Handler) model.Handler {
 	return func(e model.Event) error {
@@ -50,3 +51,5 @@ func decorateScript(fn model.Handler) model.Handler {
 func decorateScriptEvent(fn func(e model.Event) error) model.Handler {
 	return decorateScript(fn)
 }
+=======
+>>>>>>> 6d711bdae12e6a75969e433c0a54417e0a79bf7e
