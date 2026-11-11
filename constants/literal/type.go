@@ -10,7 +10,7 @@ type pathType struct {
 }
 
 type titleType struct {
-	Menu        string
+	List        string
 	ListScript  string
 	EnterScript string
 	Access      string

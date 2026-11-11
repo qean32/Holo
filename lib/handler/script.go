@@ -30,9 +30,6 @@ func CreateScript(event model.Event) error {
 }
 
 func RunScript(event model.Event) error {
-	if err := validateName(event.KeyWord); err != nil {
-		return errorlist.InvalidName(event.KeyWord, err)
-	}
 	if err := death.RunCmd(filepath.Join(constants.Root, scriptPath(event.KeyWord))); err != nil {
 		return errorlist.Run(event.KeyWord, err)
 	}
@@ -40,9 +37,6 @@ func RunScript(event model.Event) error {
 }
 
 func RemoveScript(event model.Event) error {
-	if err := validateName(event.KeyWord); err != nil {
-		return errorlist.InvalidName(event.KeyWord, err)
-	}
 	if err := death.RemoveFile(scriptPath(event.KeyWord)); err != nil {
 		return errorlist.Remove(event.KeyWord, err)
 	}

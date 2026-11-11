@@ -21,8 +21,6 @@ func WriteFile(data, path string) error {
 	return nil
 }
 
-// PushToFile дописывает newText в конец файла (вместо полного
-// перечитывания и перезаписи файла на каждую запись).
 func PushToFile(path, newText string) error {
 	file, err := os.OpenFile(filepath.Join(constants.Root, path), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0o644)
 	if err != nil {

@@ -19,8 +19,8 @@ const (
 	RUNSCRIPT    = "run"
 	REMOVESCRIPT = "rsc"
 
-	MENUSCRIPT       = "msc"
-	MENUSCRIPTREMOVE = "menuremove"
+	LISTSCRIPT       = "listsc"
+	LISTSCRIPTREMOVE = "listremove"
 
 	MENU = "menu"
 	INIT = "init"

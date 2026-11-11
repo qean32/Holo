@@ -24,6 +24,9 @@ func InitRoot() error {
 	if err := os.MkdirAll(Root, 0o755); err != nil {
 		return errorlist.ErrInitRoot
 	}
+	if err := os.MkdirAll(filepath.Join(Root, Script), 0o755); err != nil {
+		return errorlist.ErrInitRoot
+	}
 	return nil
 }
 
@@ -61,10 +64,10 @@ var HelpMessage = `
 %v test           unit tests
 %v
 %v
-%v menu, clog, log, drop, stop, help,
+%v list, clog, log, drop, stop, help,
 %v
 %v sc             add script                          sc keyWord -p:payload
-%v menu           menu scripts
+%v list           list scripts
 %v run            run script                          run keyWord
 %v rsc            remove script                       rsc keyWord
 %v

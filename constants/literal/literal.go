@@ -10,12 +10,12 @@ var Extension = extensionType{
 }
 
 var Path = pathType{
-	PathLog: "log.txt",
+	PathLog: "log" + Extension.Txt,
 }
 
 var Titles = titleType{
-	Menu:        "Меню",
-	ListScript:  "Список сценариев",
-	EnterScript: "Добавить сценарий",
+	List:        "Меню",
+	ListScript:  "Список команд",
+	EnterScript: "Добавить команду",
 	Access:      "Подтвердите действие (yea/no)",
 }

@@ -17,3 +17,7 @@ func Response(message ...any) {
 func Reset() {
 	callstack.Push(model.Event{Key: eventlist.RESET})
 }
+
+func Success() {
+	Response("/ᐠ-˕-マ Успех!")
+}

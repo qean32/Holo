@@ -1,4 +1,4 @@
-package menu
+package list
 
 import (
 	"main/constants"
@@ -10,13 +10,13 @@ import (
 	"main/lib/global"
 	"main/lib/utils"
 	"main/model"
-	"main/terminal/menu"
+	"main/terminal/list"
 	"path/filepath"
 )
 
 func MainMenu() {
-	menu.Menu(model.ListPayload{
-		Options: Menu(),
+	list.List(model.ListPayload{
+		Options: List(),
 		Title:   "Главное меню: ",
 	})
 }
@@ -39,7 +39,7 @@ func getScriptList(title string, makeEvent func(name string) model.Event) error 
 		return errorlist.Read(dir, err)
 	}
 
-	menu.Menu(model.ListPayload{
+	list.List(model.ListPayload{
 		Options: array.Mapped(commands,
 			func(value string) model.Option {
 				return model.Option{
@@ -52,7 +52,7 @@ func getScriptList(title string, makeEvent func(name string) model.Event) error 
 	return nil
 }
 
-func Menu() []model.Option {
+func List() []model.Option {
 	items := []model.Option{
 		{Message: "Ручной ввод", Event: model.Event{Key: eventlist.MANUAL}},
 		{Message: "Помощь", Event: model.Event{Key: eventlist.HELP}},
@@ -62,9 +62,9 @@ func Menu() []model.Option {
 
 	if global.ScriptEnabled() {
 		scriptItems := []model.Option{
-			{Message: "Запустить команду", Event: model.Event{Key: eventlist.MENUSCRIPT}},
+			{Message: "Запустить команду", Event: model.Event{Key: eventlist.LISTSCRIPT}},
 			{Message: "Добавить команду", Event: model.Event{Key: eventlist.QCREATESCRIPT}},
-			{Message: "Удалить команду", Event: model.Event{Key: eventlist.MENUSCRIPTREMOVE}},
+			{Message: "Удалить команду", Event: model.Event{Key: eventlist.LISTSCRIPTREMOVE}},
 		}
 		items = append(scriptItems, items...)
 	}

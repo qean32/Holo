@@ -1,4 +1,4 @@
-package menu
+package list
 
 import (
 	"atomicgo.dev/cursor"
