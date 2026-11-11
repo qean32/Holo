@@ -1,21 +1,19 @@
 package handler
 
 import (
-	"main/callstack"
 	errorlist "main/constants/error-list"
 	"main/model"
 	"main/terminal/questionnaire"
+
+	"atomicgo.dev/cursor"
 )
 
-func qAccess(event model.Event) error {
-	if event.SubEvent == nil {
-		return errorlist.ErrNoSubEvent
-	}
-
+func QAccess(event model.Event, warning string) error {
+	cursor.Up(1)
 	q := questionnaire.Questionnaire(model.QuestionnairePayload{
 		Questions: []model.Question{
 			{
-				Message:  "Подтвердите действие (yea/no)",
+				Message:  "confirm (yea/no)" + warning,
 				Key:      "Response",
 				Callback: func(string) bool { return true },
 			},
@@ -27,6 +25,5 @@ func qAccess(event model.Event) error {
 		return errorlist.ErrAccessDenied
 	}
 
-	callstack.Push(*event.SubEvent)
 	return nil
 }

@@ -1,4 +1,4 @@
-package list
+package menu
 
 import (
 	"fmt"
@@ -25,7 +25,7 @@ func (s *state) length() int {
 	return len(s.options)
 }
 
-func List(payload model.ListPayload) {
+func Menu(payload model.ListPayload) {
 	terminal.DownAndStart()
 	if len(payload.Options) == 0 {
 		event.Response("length == zero! ave caesar! ")

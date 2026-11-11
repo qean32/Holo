@@ -19,8 +19,8 @@ const (
 	RUNSCRIPT    = "run"
 	REMOVESCRIPT = "rsc"
 
-	LISTSCRIPT       = "list"
-	LISTSCRIPTREMOVE = "listremove"
+	MENUSCRIPT       = "msc"
+	MENUSCRIPTREMOVE = "menuremove"
 
 	MENU = "menu"
 	INIT = "init"
@@ -33,9 +33,8 @@ const (
 const (
 	INWORK           = "inwork"
 	RESPONSE         = "response"
-	MANUCREATESCRIPT = "MANUCREATESCRIPT"
-	MENUCRYPTO       = "MENUCRYPTO"
-	PUREREMOVESCRIPT = "REMOVESCRIPT"
+	QCREATESCRIPT    = "QCREATESCRIPT~"
+	PUREREMOVESCRIPT = "REMOVESCRIPT~"
 	RESET            = "r"
 	MANUAL           = "manual"
 	TEST             = "test"

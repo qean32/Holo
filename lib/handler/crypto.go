@@ -2,18 +2,18 @@ package handler
 
 import errorlist "main/constants/error-list"
 
-func encrypt() error {
+func Encrypt() error {
 	return errorlist.ErrorInwork
 }
 
-func decrypt() error {
+func Decrypt() error {
 	return errorlist.ErrorInwork
 }
 
-func generateKey() error {
+func GenerateKey() error {
 	return errorlist.ErrorInwork
 }
 
-func generateMasterKey() error {
+func GenerateMasterKey() error {
 	return errorlist.ErrorInwork
 }

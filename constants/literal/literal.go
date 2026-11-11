@@ -6,6 +6,7 @@ var Flags = flagType{
 
 var Extension = extensionType{
 	Script: ".bat",
+	Txt:    ".txt",
 }
 
 var Path = pathType{

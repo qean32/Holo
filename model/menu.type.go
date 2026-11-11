@@ -1,6 +1,6 @@
 package model
 
-type List struct {
+type Menu struct {
 	Title    string
 	Position int
 	Length   int

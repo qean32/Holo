@@ -16,13 +16,13 @@ import (
 
 const dirPerm os.FileMode = 0o755
 
-func reset() {
+func Reset() {
 	death.ClearTerminal()
 	terminal.RenderBanner()
 	manual.Manual()
 }
 
-func drop() error {
+func Drop() error {
 	if err := os.RemoveAll(constants.Root); err != nil {
 		return errorlist.Remove(constants.Root, err)
 	}
@@ -32,14 +32,14 @@ func drop() error {
 	return nil
 }
 
-func clearLog() error {
+func ClearLog() error {
 	if err := death.ClearFile(literal.Path.PathLog); err != nil {
 		return errorlist.ClearLog(err)
 	}
 	return nil
 }
 
-func openLog() error {
+func OpenLog() error {
 	path := filepath.Join(constants.Root, literal.Path.PathLog)
 	if err := death.RunCmd(path); err != nil {
 		return errorlist.Open(path, err)
@@ -47,11 +47,11 @@ func openLog() error {
 	return nil
 }
 
-func inwork() {
+func Inwork() {
 	event.Response("В разработке")
 }
 
-func toggleLogger() {
+func ToggleLogger() {
 	if global.EventLogToggle() {
 		event.Response("Логирование событий: включено")
 		return
@@ -59,7 +59,7 @@ func toggleLogger() {
 	event.Response("Логирование событий: выключено")
 }
 
-func toggleScript() {
+func ToggleScript() {
 	if global.ScriptToggle() {
 		event.Response("Работа со сценариями: включено")
 		return
@@ -67,7 +67,7 @@ func toggleScript() {
 	event.Response("Работа со сценариями: выключено")
 }
 
-func init_() error {
+func InitSystem() error {
 	if err := os.MkdirAll(filepath.Join(constants.Root, constants.Script), dirPerm); err != nil {
 		return errorlist.Create(constants.Script, err)
 	}

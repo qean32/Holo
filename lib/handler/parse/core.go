@@ -11,33 +11,24 @@ import (
 )
 
 const (
-	prefixPassword = "pass/"
-	prefixPayload  = "p/"
+	prefixPassword = "-pass:"
+	prefixPayload  = "-p:"
 )
 
-type Options struct {
-	KeyWord     bool
-	Payload     bool
-	Password    bool
-	Flags       bool
-	GetSubEvent bool
-	SubEvent    string
-}
-
-var registry = map[string]Options{
+var registry = map[string]model.ParseOptions{
 	eventlist.CRYPTO:   {KeyWord: true, Payload: true, Password: true},
 	eventlist.DECRYPTO: {KeyWord: true, Password: true},
 
 	eventlist.SCRIPT:       {KeyWord: true, Payload: true},
 	eventlist.RUNSCRIPT:    {KeyWord: true},
-	eventlist.REMOVESCRIPT: {GetSubEvent: true, SubEvent: eventlist.PUREREMOVESCRIPT, KeyWord: true},
+	eventlist.REMOVESCRIPT: {GetSubEvent: true, SubEvent: eventlist.REMOVESCRIPT, KeyWord: true},
 }
 
 func Dispatch(key string, args []string) (model.Event, error) {
 	return parse(args, registry[key])
 }
 
-func parse(args []string, opts Options) (model.Event, error) {
+func parse(args []string, opts model.ParseOptions) (model.Event, error) {
 	if len(args) == 0 {
 		return model.Event{}, errorlist.ErrEmptyCommand
 	}

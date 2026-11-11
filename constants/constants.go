@@ -64,7 +64,7 @@ var HelpMessage = `
 %v menu, clog, log, drop, stop, help,
 %v
 %v sc             add script                          sc keyWord -p:payload
-%v list           list scripts
+%v menu           menu scripts
 %v run            run script                          run keyWord
 %v rsc            remove script                       rsc keyWord
 %v
