@@ -28,14 +28,8 @@ func Questionnaire(payload model.QuestionnairePayload) map[string]string {
 
 func askQuestion(question model.Question, isEnd bool) string {
 	return field.Field(model.FieldPayload{
-<<<<<<< HEAD
 		Prefix:    question.Message + " > ",
 		PrefixSRG: []int{sgr.DIM},
 		Transfer:  isEnd,
-=======
-		Prefix:          question.Message + " > ",
-		PrefixSRG:       []int{sgr.DIM},
-		IsQuestionnaire: true,
->>>>>>> 6d711bdae12e6a75969e433c0a54417e0a79bf7e
 	})
 }
