@@ -1,11 +1,11 @@
 package handler
 
 import (
+	"atomicgo.dev/cursor"
+
 	errorlist "main/constants/error-list"
 	"main/model"
 	"main/terminal/questionnaire"
-
-	"atomicgo.dev/cursor"
 )
 
 func QAccess(event model.Event, warning string) error {

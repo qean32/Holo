@@ -1,6 +1,8 @@
 package list
 
 import (
+	"path/filepath"
+
 	"main/constants"
 	errorlist "main/constants/error-list"
 	eventlist "main/constants/event-list"
@@ -11,7 +13,6 @@ import (
 	"main/lib/utils"
 	"main/model"
 	"main/terminal/list"
-	"path/filepath"
 )
 
 func MainMenu() {

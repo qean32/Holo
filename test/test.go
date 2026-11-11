@@ -2,12 +2,13 @@ package test
 
 import (
 	"fmt"
+	"path/filepath"
+
 	"main/callstack"
 	"main/constants"
 	eventlist "main/constants/event-list"
 	"main/lib/death"
 	"main/model"
-	"path/filepath"
 )
 
 func Test() {

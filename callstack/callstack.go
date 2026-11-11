@@ -1,8 +1,9 @@
 package callstack
 
 import (
-	"main/model"
 	"sync"
+
+	"main/model"
 )
 
 var (

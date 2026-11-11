@@ -8,11 +8,10 @@ import (
 	"time"
 
 	"main/callstack"
+	errorlist "main/constants/error-list"
 	eventlist "main/constants/event-list"
 	"main/constants/literal"
 	"main/model"
-
-	errorlist "main/constants/error-list"
 )
 
 func Logger(stackErr model.StackError) error {

@@ -4,12 +4,12 @@ import (
 	"path/filepath"
 	"strings"
 
+	"atomicgo.dev/cursor"
+
 	"main/constants"
 	errorlist "main/constants/error-list"
 	"main/constants/literal"
 	"main/terminal"
-
-	"atomicgo.dev/cursor"
 )
 
 func validateName(name string) error {

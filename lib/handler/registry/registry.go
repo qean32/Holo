@@ -1,6 +1,8 @@
 package registry
 
 import (
+	"slices"
+
 	"main/callstack/manual"
 	errorlist "main/constants/error-list"
 	eventlist "main/constants/event-list"
@@ -9,7 +11,6 @@ import (
 	"main/lib/handler/menu"
 	"main/model"
 	test "main/test"
-	"slices"
 )
 
 var commands = []model.Command{
