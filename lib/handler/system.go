@@ -10,11 +10,19 @@ import (
 	errorlist "main/constants/error-list"
 	"main/constants/literal"
 	"main/lib/death"
-	"main/lib/eventlog"
+	"main/lib/global"
 	"main/terminal"
 )
 
 const dirPerm os.FileMode = 0o755
+
+func toggleResponse(enabled bool, onMsg, offMsg string) {
+	if enabled {
+		event.Response(onMsg)
+		return
+	}
+	event.Response(offMsg)
+}
 
 func Reset() {
 	death.ClearTerminal()
@@ -41,7 +49,7 @@ func ClearLog() error {
 
 func OpenLog() error {
 	path := filepath.Join(constants.Root, literal.Path.PathLog)
-	if err := death.RunCmd(path); err != nil {
+	if err := death.RunScript(path); err != nil {
 		return errorlist.Open(path, err)
 	}
 	return nil
@@ -52,16 +60,24 @@ func Inwork() {
 }
 
 func ToggleLogger() {
-	if eventlog.Toggle() {
-		event.Response("Логирование событий: включено")
-		return
-	}
-	event.Response("Логирование событий: выключено")
+	toggleResponse(
+		global.EventLogToggle(),
+		"Логирование событий: включено",
+		"Логирование событий: выключено",
+	)
+}
+
+func ToggleScript() {
+	toggleResponse(
+		global.ScriptToggle(),
+		"Работа со сценариями: включено",
+		"Работа со сценариями: выключено",
+	)
 }
 
 func InitSystem() error {
-	if err := os.MkdirAll(filepath.Join(constants.Root, constants.Cmd), dirPerm); err != nil {
-		return errorlist.Create(constants.Cmd, err)
+	if err := os.MkdirAll(filepath.Join(constants.Root, constants.Script), dirPerm); err != nil {
+		return errorlist.Create(constants.Script, err)
 	}
 	return death.CreateFile(literal.Path.PathLog, "")
 }

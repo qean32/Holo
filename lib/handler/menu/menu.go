@@ -1,44 +1,46 @@
 package menu
 
 import (
-	eventlist "main/constants/event-list"
 	"path/filepath"
 
 	"main/constants"
 	errorlist "main/constants/error-list"
+	eventlist "main/constants/event-list"
 	"main/constants/literal"
 	"main/lib/array"
 	"main/lib/death"
+	"main/lib/global"
 	"main/lib/utils"
 	"main/model"
-	"main/terminal/menu"
+	"main/terminal/list"
 )
 
-var menuOption = []model.Option{
-	{Message: "Запустить команду", Event: model.Event{Key: eventlist.BATLIST}},
-	{Message: "Ручной ввод", Event: model.Event{Key: eventlist.MANUAL}},
-	{Message: "Удалить команду", Event: model.Event{Key: eventlist.BATLISTREMOVE}},
-	{Message: "Добавить команду", Event: model.Event{Key: eventlist.QCREATEBAT}},
-	{Message: "Генерация мастер ключа", Event: model.Event{Key: eventlist.INWORK}},
-	{Message: "Помощь", Event: model.Event{Key: eventlist.HELP}},
-	{Message: "Выход", Event: model.Event{Key: eventlist.STOP}},
-}
-
 func MainMenu() {
-	menu.Menu(model.ListPayload{
-		Options: menuOption,
+	list.List(model.ListPayload{
+		Options: List(),
 		Title:   "Главное меню: ",
 	})
 }
 
-func localBalList(title string, makeEvent func(name string) model.Event) error {
-	dir := filepath.Join(constants.Root, constants.Cmd)
-	commands, err := death.ListFilesByExt(dir, literal.Extension.Bat)
+func ScriptList(keyEvent string) error {
+	return getScriptList(literal.Titles.ListScript,
+		func(value string) model.Event {
+			return model.Event{
+				Key:     keyEvent,
+				KeyWord: utils.TrimBatExtension(value),
+			}
+		},
+	)
+}
+
+func getScriptList(title string, makeEvent func(name string) model.Event) error {
+	dir := filepath.Join(constants.Root, constants.Script)
+	commands, err := death.ListFilesByExt(dir, literal.Extension.Script)
 	if err != nil {
 		return errorlist.Read(dir, err)
 	}
 
-	menu.Menu(model.ListPayload{
+	list.List(model.ListPayload{
 		Options: array.Mapped(commands,
 			func(value string) model.Option {
 				return model.Option{
@@ -51,13 +53,22 @@ func localBalList(title string, makeEvent func(name string) model.Event) error {
 	return nil
 }
 
-func BatList(keyEvent string) error {
-	return localBalList(literal.Titles.ListBat,
-		func(value string) model.Event {
-			return model.Event{
-				Key:     keyEvent,
-				KeyWord: utils.TrimBatExtension(value),
-			}
-		},
-	)
+func List() []model.Option {
+	items := []model.Option{
+		{Message: "Ручной ввод", Event: model.Event{Key: eventlist.MANUAL}},
+		{Message: "Помощь", Event: model.Event{Key: eventlist.HELP}},
+		{Message: "Генерация мастер ключа", Event: model.Event{Key: eventlist.INWORK}},
+		{Message: "Выход", Event: model.Event{Key: eventlist.STOP}},
+	}
+
+	if global.ScriptEnabled() {
+		scriptItems := []model.Option{
+			{Message: "Запустить команду", Event: model.Event{Key: eventlist.LISTSCRIPT}},
+			{Message: "Добавить команду", Event: model.Event{Key: eventlist.QCREATESCRIPT}},
+			{Message: "Удалить команду", Event: model.Event{Key: eventlist.LISTSCRIPTREMOVE}},
+		}
+		items = append(scriptItems, items...)
+	}
+
+	return items
 }

@@ -19,9 +19,9 @@ var registry = map[string]model.ParseOptions{
 	eventlist.CRYPTO:   {KeyWord: true, Payload: true, Password: true},
 	eventlist.DECRYPTO: {KeyWord: true, Password: true},
 
-	eventlist.BAT:       {KeyWord: true, Payload: true},
-	eventlist.RUNBAT:    {KeyWord: true},
-	eventlist.REMOVEBAT: {GetSubEvent: true, SubEvent: eventlist.PUREREMOVEBAT, KeyWord: true},
+	eventlist.SCRIPT:       {KeyWord: true, Payload: true},
+	eventlist.RUNSCRIPT:    {KeyWord: true},
+	eventlist.REMOVESCRIPT: {GetSubEvent: true, SubEvent: eventlist.REMOVESCRIPT, KeyWord: true},
 }
 
 func Dispatch(key string, args []string) (model.Event, error) {
@@ -72,6 +72,8 @@ func parse(args []string, opts model.ParseOptions) (model.Event, error) {
 	return event, nil
 }
 
+// getItem ищет в аргументах первое вхождение с заданным префиксом
+// и возвращает значение после префикса.
 func getItem(args []string, prefix string) (string, error) {
 	for _, a := range args {
 		if v, ok := strings.CutPrefix(a, prefix); ok {
@@ -81,6 +83,8 @@ func getItem(args []string, prefix string) (string, error) {
 	return "", errorlist.ErrNotExist
 }
 
+// getPayload извлекает полезную нагрузку: всё после первого вхождения префикса,
+// включая остальные аргументы.
 func getPayload(args []string, prefix string) (string, error) {
 	for i, a := range args {
 		if v, ok := strings.CutPrefix(a, prefix); ok {

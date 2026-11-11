@@ -2,11 +2,12 @@ package utils
 
 import (
 	"fmt"
+	"strconv"
+	"strings"
+
 	"main/constants/literal"
 	"main/lib/death"
 	"main/model"
-	"strconv"
-	"strings"
 )
 
 func GetCustomMessage(message string, sgr ...int) string {
@@ -32,10 +33,11 @@ func GetShortEvent(event model.Event) model.Event {
 	event.DateTime = death.CurrentTime()
 	return event
 }
+
 func TrimExtension(value string, extension string) string {
 	return strings.TrimSuffix(value, extension)
 }
 
 func TrimBatExtension(value string) string {
-	return TrimExtension(value, literal.Extension.Bat)
+	return TrimExtension(value, literal.Extension.Script)
 }

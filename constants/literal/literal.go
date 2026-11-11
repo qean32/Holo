@@ -5,8 +5,8 @@ var Flags = flagType{
 }
 
 var Extension = extensionType{
-	Bat:  ".bat",
-	Txt: ".txt",
+	Script: ".bat",
+	Txt:    ".txt",
 }
 
 var Path = pathType{
@@ -14,8 +14,8 @@ var Path = pathType{
 }
 
 var Titles = titleType{
-	Menu:     "Меню",
-	ListBat:  "Список команд",
-	EnterBat: "Добавить команду",
-	Access:   "Подтвердите действие (yea/no)",
+	List:        "Меню",
+	ListScript:  "Список команд",
+	EnterScript: "Добавить команду",
+	Access:      "Подтвердите действие (yea/no)",
 }

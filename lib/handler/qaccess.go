@@ -1,12 +1,15 @@
 package handler
 
 import (
+	"atomicgo.dev/cursor"
+
 	errorlist "main/constants/error-list"
 	"main/model"
 	"main/terminal/questionnaire"
 )
 
 func QAccess(event model.Event, warning string) error {
+	cursor.Up(1)
 	q := questionnaire.Questionnaire(model.QuestionnairePayload{
 		Questions: []model.Question{
 			{

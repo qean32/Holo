@@ -1,6 +1,10 @@
 package registry
 
-import "main/model"
+import (
+	errorlist "main/constants/error-list"
+	"main/lib/global"
+	"main/model"
+)
 
 func Success(name string) bool {
 	command, ok := registry[name]
@@ -32,4 +36,17 @@ func ignoreEvent(fn func() error) model.Handler {
 	return func(_ model.Event) error {
 		return fn()
 	}
+}
+
+func decorateScript(fn model.Handler) model.Handler {
+	return func(e model.Event) error {
+		if !global.ScriptEnabled() {
+			return errorlist.ErrScriptOff
+		}
+		return fn(e)
+	}
+}
+
+func decorateScriptEvent(fn func(e model.Event) error) model.Handler {
+	return decorateScript(fn)
 }

@@ -15,27 +15,28 @@ const (
 	STOP = "stop"
 	HELP = "help"
 
-	BAT       = "bat"
-	RUNBAT    = "run"
-	REMOVEBAT = "rbat"
+	SCRIPT       = "sc"
+	RUNSCRIPT    = "run"
+	REMOVESCRIPT = "rsc"
 
-	BATLIST       = "list"
-	BATLISTREMOVE = "listremove"
+	LISTSCRIPT       = "listsc"
+	LISTSCRIPTREMOVE = "listremove"
 
 	MENU = "menu"
 	INIT = "init"
 
-	LOGGER = "logger"
+	LOGGERTOGGLE = "logger"
+	SCRIPTTOGGLE = "sct"
 )
 
 // ТЕХНИЧЕСКИЕ
 const (
-	INWORK        = "inwork"
-	RESPONSE      = "response"
-	QCREATEBAT    = "QCREATEBAT~"
-	PUREREMOVEBAT = "PUREREMOVEBAT~"
-	RESET         = "r"
-	MANUAL        = "manual"
-	TEST          = "test"
-	TESTVIEW      = "testview"
+	INWORK           = "inwork"
+	RESPONSE         = "response"
+	QCREATESCRIPT    = "QCREATESCRIPT~"
+	PUREREMOVESCRIPT = "REMOVESCRIPT~"
+	RESET            = "r"
+	MANUAL           = "manual"
+	TEST             = "test"
+	TESTVIEW         = "testview"
 )

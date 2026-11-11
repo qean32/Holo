@@ -1,8 +1,9 @@
 package questionnaire
 
 import (
-	"main/constants"
 	"slices"
+
+	"main/constants"
 )
 
 func IsAcceptableYea(answer string) bool {

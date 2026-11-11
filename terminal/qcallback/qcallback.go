@@ -1,12 +1,12 @@
 package qcallback
 
 import (
-	"main/callstack/event"
-	"main/terminal"
-
 	"atomicgo.dev/cursor"
 	"atomicgo.dev/keyboard"
 	"atomicgo.dev/keyboard/keys"
+
+	"main/callstack/event"
+	"main/terminal"
 )
 
 func QCallback(callback func()) {

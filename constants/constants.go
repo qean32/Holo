@@ -11,8 +11,8 @@ import (
 const projectName = "holoproject"
 
 var (
-	Root = `private`
-	Cmd  = `cmd`
+	Root   = `private`
+	Script = `script`
 )
 
 func InitRoot() error {
@@ -24,7 +24,7 @@ func InitRoot() error {
 	if err := os.MkdirAll(Root, 0o755); err != nil {
 		return errorlist.ErrInitRoot
 	}
-	if err := os.MkdirAll(filepath.Join(Root, Cmd), 0o755); err != nil {
+	if err := os.MkdirAll(filepath.Join(Root, Script), 0o755); err != nil {
 		return errorlist.ErrInitRoot
 	}
 	return nil
@@ -45,7 +45,7 @@ var PROJECT_INIT = `
 
 // ASCII
 // https://translated.turbopages.org/proxy_u/en-ru.ru.6c604ba4-6a11ef9b-b4e5d92b-74722d776562/https/student.cs.uwaterloo.ca/~cs452/terminal.html
-// https://www.asciiart.eu/text-to-ascii-art respect
+// https://www.txtiiart.eu/text-to-ascii-art respect
 // https://patorjk.com/software/taag/#p=testall&f=Broadway&t=holoproject+2&x=none&v=4&h=4&w=80&we=false
 
 var HelpMessage = `
@@ -58,22 +58,22 @@ var HelpMessage = `
 %v crypto         encryption
 %v ecrypto        decryption
 %v
-%v bat            add .bat                          bat keyWord -p:payload
-%v list           list .bat
-%v run            run .bat                          run keyWord
-%v rbat           remove .bat                       rbat keyWord
-%v
 %v gmaster        generate master key
 %v gkey           generate key
 %v
 %v test           unit tests
 %v
 %v
-%v menu, clog, log, drop, stop, help,
+%v list, clog, log, drop, stop, help,
+%v
+%v sc             add script                          sc keyWord -p:payload
+%v list           list scripts
+%v run            run script                          run keyWord
+%v rsc            remove script                       rsc keyWord
 %v
 `
 
-const CHAR_SELECTED_ITEM = "+ "
+const CHAR_SELECTED_ITEM = "> "
 const CHAR_UN_SELECTED_ITEM = "│  "
 
 const FIELDPREFIX = "> "

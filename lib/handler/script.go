@@ -19,31 +19,31 @@ func Response(event model.Event) error {
 	return nil
 }
 
-func CreateBat(event model.Event) error {
+func CreateScript(event model.Event) error {
 	if err := validateName(event.KeyWord); err != nil {
 		return errorlist.InvalidName(event.KeyWord, err)
 	}
-	if err := death.CreateFile(cmdPath(event.KeyWord), event.Payload); err != nil {
+	if err := death.CreateFile(scriptPath(event.KeyWord), event.Payload); err != nil {
 		return errorlist.Create(event.KeyWord, err)
 	}
 	return nil
 }
 
-func RunBat(event model.Event) error {
-	if err := death.RunCmd(filepath.Join(constants.Root, cmdPath(event.KeyWord))); err != nil {
+func RunScript(event model.Event) error {
+	if err := death.RunScript(filepath.Join(constants.Root, scriptPath(event.KeyWord))); err != nil {
 		return errorlist.Run(event.KeyWord, err)
 	}
 	return nil
 }
 
-func RemoveCmd(event model.Event) error {
-	if err := death.RemoveFile(cmdPath(event.KeyWord)); err != nil {
+func RemoveScript(event model.Event) error {
+	if err := death.RemoveFile(scriptPath(event.KeyWord)); err != nil {
 		return errorlist.Remove(event.KeyWord, err)
 	}
 	return nil
 }
 
-func QuestionnaireCreateBat() error {
+func QuestionnaireCreateScript() error {
 	q := questionnaire.Questionnaire(model.QuestionnairePayload{
 		Questions: []model.Question{
 			{
@@ -61,11 +61,11 @@ func QuestionnaireCreateBat() error {
 				},
 			},
 		},
-		Title: literal.Titles.EnterBat,
+		Title: literal.Titles.EnterScript,
 	})
 
-	return CreateBat(model.Event{
-		Key:      eventlist.BAT,
+	return CreateScript(model.Event{
+		Key:      eventlist.SCRIPT,
 		KeyWord:  q["KeyWord"],
 		Payload:  q["Payload"],
 		DateTime: death.CurrentTime(),

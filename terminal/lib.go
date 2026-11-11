@@ -2,11 +2,12 @@ package terminal
 
 import (
 	"fmt"
-	"main/constants"
 	"strings"
 
 	"atomicgo.dev/cursor"
 	"github.com/nathan-fiscaletti/consolesize-go"
+
+	"main/constants"
 )
 
 func PrintASCIICenter(ascii string, separator string) {
