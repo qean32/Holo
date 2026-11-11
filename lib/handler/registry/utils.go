@@ -48,10 +48,5 @@ func decorateScript(fn model.Handler) model.Handler {
 }
 
 func decorateScriptEvent(fn func(e model.Event) error) model.Handler {
-	return func(e model.Event) error {
-		if !global.ScriptEnabled() {
-			return errorlist.ErrScriptOff
-		}
-		return fn(e)
-	}
+	return decorateScript(fn)
 }

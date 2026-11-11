@@ -31,7 +31,7 @@ func CurrentTime() string {
 	return time.Now().Format("2006-01-02 15:04:05")
 }
 
-func RunCmd(command string) error {
+func RunScript(command string) error {
 	if err := exec.Command("cmd", "/C", command).Run(); err != nil {
 		return errorlist.RunCommand(command, err)
 	}

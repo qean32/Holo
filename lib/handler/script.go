@@ -30,7 +30,7 @@ func CreateScript(event model.Event) error {
 }
 
 func RunScript(event model.Event) error {
-	if err := death.RunCmd(filepath.Join(constants.Root, scriptPath(event.KeyWord))); err != nil {
+	if err := death.RunScript(filepath.Join(constants.Root, scriptPath(event.KeyWord))); err != nil {
 		return errorlist.Run(event.KeyWord, err)
 	}
 	return nil

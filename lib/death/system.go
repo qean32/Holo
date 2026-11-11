@@ -8,30 +8,25 @@ import (
 	errorlist "main/constants/error-list"
 )
 
-func WriteFile(data, path string) error {
-	file, err := os.Create(filepath.Join(constants.Root, path))
+func writeToFile(path string, flag int, data string, errFunc func(string, error) error) error {
+	file, err := os.OpenFile(filepath.Join(constants.Root, path), flag, 0o644)
 	if err != nil {
-		return errorlist.CreateFile(path, err)
+		return errFunc(path, err)
 	}
 	defer file.Close()
 
 	if _, err := file.WriteString(data); err != nil {
-		return errorlist.WriteFile(path, err)
+		return errFunc(path, err)
 	}
 	return nil
 }
 
-func PushToFile(path, newText string) error {
-	file, err := os.OpenFile(filepath.Join(constants.Root, path), os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0o644)
-	if err != nil {
-		return errorlist.OpenFile(path, err)
-	}
-	defer file.Close()
+func WriteFile(data, path string) error {
+	return writeToFile(path, os.O_CREATE|os.O_WRONLY|os.O_TRUNC, data, errorlist.CreateFile)
+}
 
-	if _, err := file.WriteString(newText + "\n"); err != nil {
-		return errorlist.WriteFile(path, err)
-	}
-	return nil
+func PushToFile(path, newText string) error {
+	return writeToFile(path, os.O_APPEND|os.O_CREATE|os.O_WRONLY, newText+"\n", errorlist.WriteFile)
 }
 
 func CreateFile(path string, content string) error {

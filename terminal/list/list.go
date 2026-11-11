@@ -28,7 +28,7 @@ func (s *state) length() int {
 func List(payload model.ListPayload) {
 	terminal.DownAndStart()
 	if len(payload.Options) == 0 {
-		event.Response("length == zero! ave caesar! ")
+		event.Response("список пуст")
 		return
 	}
 

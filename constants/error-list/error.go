@@ -31,73 +31,78 @@ var (
 	ErrScriptOff = errors.New("Отключена работа со сценариями -sct")
 )
 
+// wrapError форматирует ошибку с заданным сообщением и оборачивает cause err.
+func wrapError(msg string, err error) error {
+	return fmt.Errorf("%s: %w", msg, err)
+}
+
 // InvalidName builds an invalid name error,
 // adding the problematic name and wrapping the cause err.
 func InvalidName(name string, err error) error {
-	return fmt.Errorf("Invalid name %q: %w", name, err)
+	return wrapError(fmt.Sprintf("Invalid name %q", name), err)
 }
 
 // Create — error creating an object with the name.
 func Create(name string, err error) error {
-	return fmt.Errorf("Create %s: %w", name, err)
+	return wrapError(fmt.Sprintf("Create %s", name), err)
 }
 
 // Run — error running an object with the name.
 func Run(name string, err error) error {
-	return fmt.Errorf("Run %s: %w", name, err)
+	return wrapError(fmt.Sprintf("Run %s", name), err)
 }
 
 // Remove — error removing an object with the name.
 func Remove(name string, err error) error {
-	return fmt.Errorf("Remove %s: %w", name, err)
+	return wrapError(fmt.Sprintf("Remove %s", name), err)
 }
 
 // Read — error reading an object with the name.
 func Read(name string, err error) error {
-	return fmt.Errorf("Read %s: %w", name, err)
+	return wrapError(fmt.Sprintf("Read %s", name), err)
 }
 
 // Open — error opening an object with the name.
 func Open(name string, err error) error {
-	return fmt.Errorf("Open %s: %w", name, err)
+	return wrapError(fmt.Sprintf("Open %s", name), err)
 }
 
 // ClearLog — error clearing the log.
 func ClearLog(err error) error {
-	return fmt.Errorf("Clear log: %w", err)
+	return wrapError("Clear log", err)
 }
 
 // RunCommand — error running the command.
 func RunCommand(command string, err error) error {
-	return fmt.Errorf("Run command %q: %w", command, err)
+	return wrapError(fmt.Sprintf("Run command %q", command), err)
 }
 
 // ClearTerminal — error clearing the terminal.
 func ClearTerminal(err error) error {
-	return fmt.Errorf("Clear terminal: %w", err)
+	return wrapError("Clear terminal", err)
 }
 
 // OpenFile — error opening the file at path.
 func OpenFile(path string, err error) error {
-	return fmt.Errorf("Open %s: %w", path, err)
+	return wrapError(fmt.Sprintf("Open %s", path), err)
 }
 
 // ReadFile — error reading the file/directory at path.
 func ReadFile(path string, err error) error {
-	return fmt.Errorf("Read %s: %w", path, err)
+	return wrapError(fmt.Sprintf("Read %s", path), err)
 }
 
 // CreateFile — error creating the file at path.
 func CreateFile(path string, err error) error {
-	return fmt.Errorf("Create %s: %w; Возможно необходимо -init", path, err)
+	return wrapError(fmt.Sprintf("Create %s; Возможно необходимо -init", path), err)
 }
 
 // WriteFile — error writing to the file at path.
 func WriteFile(path string, err error) error {
-	return fmt.Errorf("Write %s: %w", path, err)
+	return wrapError(fmt.Sprintf("Write %s", path), err)
 }
 
 // RemoveFile — error removing the file at path.
 func RemoveFile(path string, err error) error {
-	return fmt.Errorf("Remove %s: %w", path, err)
+	return wrapError(fmt.Sprintf("Remove %s", path), err)
 }

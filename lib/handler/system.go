@@ -16,6 +16,14 @@ import (
 
 const dirPerm os.FileMode = 0o755
 
+func toggleResponse(enabled bool, onMsg, offMsg string) {
+	if enabled {
+		event.Response(onMsg)
+		return
+	}
+	event.Response(offMsg)
+}
+
 func Reset() {
 	death.ClearTerminal()
 	terminal.RenderBanner()
@@ -41,7 +49,7 @@ func ClearLog() error {
 
 func OpenLog() error {
 	path := filepath.Join(constants.Root, literal.Path.PathLog)
-	if err := death.RunCmd(path); err != nil {
+	if err := death.RunScript(path); err != nil {
 		return errorlist.Open(path, err)
 	}
 	return nil
@@ -52,19 +60,19 @@ func Inwork() {
 }
 
 func ToggleLogger() {
-	if global.EventLogToggle() {
-		event.Response("Логирование событий: включено")
-		return
-	}
-	event.Response("Логирование событий: выключено")
+	toggleResponse(
+		global.EventLogToggle(),
+		"Логирование событий: включено",
+		"Логирование событий: выключено",
+	)
 }
 
 func ToggleScript() {
-	if global.ScriptToggle() {
-		event.Response("Работа со сценариями: включено")
-		return
-	}
-	event.Response("Работа со сценариями: выключено")
+	toggleResponse(
+		global.ScriptToggle(),
+		"Работа со сценариями: включено",
+		"Работа со сценариями: выключено",
+	)
 }
 
 func InitSystem() error {

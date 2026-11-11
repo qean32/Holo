@@ -19,9 +19,7 @@ func main() {
 		return
 	}
 
-	if err := lib.Init(); err != nil {
-		terminal.Println(err, "--init")
-	}
+	lib.Init()
 	go runLoop()
 
 	select {}

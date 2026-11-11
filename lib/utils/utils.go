@@ -33,10 +33,13 @@ func GetShortEvent(event model.Event) model.Event {
 	event.DateTime = death.CurrentTime()
 	return event
 }
+
+// TrimExtension удаляет указанное расширение из конца строки.
 func TrimExtension(value string, extension string) string {
 	return strings.TrimSuffix(value, extension)
 }
 
+// TrimBatExtension удаляет расширение скрипта (.bat) из конца строки.
 func TrimBatExtension(value string) string {
 	return TrimExtension(value, literal.Extension.Script)
 }
