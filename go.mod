@@ -1,4 +1,4 @@
-module main
+module github.com/qean32/holo
 
 go 1.25.0
 
